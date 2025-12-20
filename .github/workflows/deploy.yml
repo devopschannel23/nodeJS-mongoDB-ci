@@ -12,8 +12,8 @@ jobs:
   test:
     env:
       MONGODB_CLUSTER_ADDRESS: 'cluster0.poyjks5.mongodb.net' 
-      MONGODB_USERNAME: 'devops23'
-      MONGODB_PASSWORD: '7w4fr9vBI8eKkAv8'
+      MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
+      MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
       PORT: 8080
     runs-on: ubuntu-latest
     steps:
