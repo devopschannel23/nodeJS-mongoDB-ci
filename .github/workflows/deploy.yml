@@ -37,9 +37,6 @@ jobs:
           echo "MONGODB_DBNAME: ${{ env.MONGODB_DB_NAME }}"
   deploy:
     needs: test
-    env:
-      MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
-      MONGODB_PASSWORD: '7w4fr9vBI8eKkAv8'
     runs-on: ubuntu-latest
     steps:
       - name: Output information
