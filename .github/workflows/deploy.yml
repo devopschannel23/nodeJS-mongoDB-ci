@@ -10,6 +10,7 @@ env:
   MONGODB_DB_NAME: mongodb
 jobs:
   test:
+    environment: testing
     env:
       MONGODB_CLUSTER_ADDRESS: 'cluster0.poyjks5.mongodb.net' 
       MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
@@ -36,9 +37,12 @@ jobs:
           echo "MONGODB_DBNAME: ${{ env.MONGODB_DB_NAME }}"
   deploy:
     needs: test
+    MONGODB_USERNAME: ${{ secrets.MONGODB_USERNAME }}
+    MONGODB_PASSWORD: '7w4fr9vBI8eKkAv8'
     runs-on: ubuntu-latest
     steps:
       - name: Output information
         run: |        
           echo "MONGODB_USERNAME: ${{ env.MONGODB_USERNAME }}"
           echo "MONGODB_DBNAME: ${{ env.MONGODB_DB_NAME }}"
+          echo "MONGODB_PASSWORD: ${{ env.MONGODB_PASSWORD }}"
