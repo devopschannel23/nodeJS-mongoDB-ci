@@ -31,6 +31,7 @@ jobs:
         run: npm start & npx wait-on http://127.0.0.1:$PORT
       - name: Run tests
         run: npm test
+        # value showing from repo environment secret
       - name: Output information
         run: |
           echo "MONGODB_USERNAME: ${{ env.MONGODB_USERNAME }}"
