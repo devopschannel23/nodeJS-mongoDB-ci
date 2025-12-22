@@ -27,7 +27,7 @@ jobs:
           MONGO_INITDB_ROOT_USERNAME: ${{ secrets.MONGODB_USER }}
           MONGO_INITDB_ROOT_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
         ports:
-          - 27017: 27017
+          - 27017:27017
     steps:
       - name: Get Code
         uses: actions/checkout@v3
