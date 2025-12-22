@@ -12,19 +12,22 @@ jobs:
   test:
     environment: testing
     env:
-      MONGODB_CLUSTER_ADDRESS: mongodb 
+      MONGODB_CONNECTION_PROTOCOL: mongodb
+      MONGODB_CLUSTER_ADDRESS: 127.0.0.1:27017 
       MONGODB_USERNAME: ${{ secrets.MONGODB_USER }}
       MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
       PORT: 8080
     runs-on: ubuntu-latest
-    container: 
-      image: node:18
+    # container: 
+    #   image: node:18
     services:
       mongodb:
         image: mongo
         env:
           MONGO_INITDB_ROOT_USERNAME: ${{ secrets.MONGODB_USER }}
           MONGO_INITDB_ROOT_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
+        ports:
+          - 27017: 27017
     steps:
       - name: Get Code
         uses: actions/checkout@v3
