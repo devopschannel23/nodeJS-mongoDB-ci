@@ -17,7 +17,7 @@ jobs:
       MONGODB_PASSWORD: ${{ secrets.MONGODB_PASSWORD }}
       PORT: 8080
     runs-on: ubuntu-latest
-    containers: 
+    container: 
       image: node:18
     steps:
       - name: Get Code
