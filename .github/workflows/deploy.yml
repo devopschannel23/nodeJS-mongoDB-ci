@@ -41,6 +41,15 @@ jobs:
           key: npm-deps-${{ hashFiles('**/package-lock.json') }}
       - name: Install dependencies
         run: npm install
+      - name: Wait for MongoDB
+        run: |
+          for i in {1..15}; do
+            nc -z mongodb 27017 && echo "MongoDB is ready" && exit 0
+            echo "Waiting for MongoDB..."
+            sleep 2
+          done
+          echo "MongoDB did not start in time"
+          exit 1
       - name: Run server
         run: npm start & npx wait-on http://127.0.0.1:$PORT
       - name: Run tests

@@ -6,23 +6,29 @@ const dbPassword = process.env.MONGODB_PASSWORD;
 const dbName = process.env.MONGODB_DB_NAME;
 
 //const uri = `mongodb+srv://${dbUser}:${dbPassword}@${clusterAddress}/?retryWrites=true&w=majority`;
-const uri = `mongodb://${dbUser}:${dbPassword}@${clusterAddress}:27017/${dbName}authSource=admin`;
+const uri = `mongodb://${dbUser}:${dbPassword}@${clusterAddress}:27017/${dbName}authSource=admin&directConnection=true&serverSelectionTimeoutMS=5000`;
 
 const client = new MongoClient(uri);
 
 
-console.log('Hang On! Connecting to your DB...');
+
+
 
 try {
+  client = new MongoClient(uri);
+  console.log('Hang On! Connecting to your DB...');
   await client.connect();
-  await client.db(dbName).command({ ping: 1 });
   console.log('Connected to your DB Server');
+  const database = client.db(dbName);
+  await database.command({ ping: 1 });
+
+  console.log('Ping Successful!');
+
 } catch (error) {
   console.log('Oops! Connection failed.');
-  await client.close();
-  console.log('See you soon! Connection closed.');
+  process.exit(1);
 }
 
-const database = client.db(dbName);
+
 
 export default database;
